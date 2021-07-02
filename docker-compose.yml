@@ -1,12 +1,12 @@
 version: '3'
 services:
   db:
-    image: postgres:alpine
+    image: library/db
     env_file:
-      - postgres.env
+      - ../library-db/postgres.env
   server:
-    image: library:library-backend
+    image: library/backend
   frontend:
-    image: library:library-frontend
+    image: library/frontend
 
 # this will be a single docker compose file to bring up the entire app, start to stop.
