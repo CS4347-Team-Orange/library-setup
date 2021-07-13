@@ -17,12 +17,12 @@ We're building a library catalog on Postgres.  The application must be written i
 
 Install [docker-compose](https://docs.docker.com/compose/install/)
 
-Run the postgres server locally: `docker-compose up`
+Run the entire stack locally: `docker-compose up`
 
-**WARNING**: The default configuration has no persistence.  Data will be destroyed when the container is stopped or removed.  
+**WARNING**: The default configuration has no persistence.  Data will be destroyed when the container is stopped or removed.  The default configuration will seed sample data to assist demoing the app. 
 
 # The stack (Tentative)
 
-* DB: Postgres 
+* DB: Postgres 13
 * Backend API: Java + Spring or Node + Express? or Python + Django or Python + Flask?
-* Frontend: ?? Vue?  React?
+* Frontend: VueJS 3 + Node 14
