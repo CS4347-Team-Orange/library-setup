@@ -4,7 +4,7 @@ set -e
 
 origpwd=$(pwd)
 projects="library-db library-frontend library-backend"
-for project in projects; do
+for project in ${projects}; do
 	cd ${origpwd}
 	cd ../${project}
 	bash build.sh

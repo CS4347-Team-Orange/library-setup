@@ -3,17 +3,17 @@ services:
   db:
     image: alex4108/library-db
     env_file:
-      - ../library-db/postgres.env
+      - postgres.env
     ports:
       - 5432:5432
   backend:
     image: alex4108/library-backend
-    env_file:
-      - ../library-frontend/prod.env
     ports:
       - 8080:8080
     depends_on:
       - db
+    links:
+      - 'db:db'
   frontend:
     image: alex4108/library-frontend
     ports:
