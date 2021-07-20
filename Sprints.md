@@ -48,5 +48,5 @@
 * 6: Assess Fines
 * 7: Fine Overview
 
-## Final Review: July 24
+## Final Review: July 25
 
