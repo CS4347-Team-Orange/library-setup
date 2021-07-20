@@ -1,6 +1,6 @@
 # Sprint Schedule
 
-**Project must be delivered by July 25**
+**Project must be delivered by July 26**
 
 ## Uno: July 14 - 17
 
@@ -36,7 +36,7 @@
 * 4: Checkin
 * 5: Checkout
 
-## Tres: July 22 - 24 **
+## Tres: July 22 - 25 **
 
 #### Backend
 
