@@ -26,7 +26,7 @@ echo "{\"credentials\": {\"app.terraform.io\": {\"token\": \"$TF_API_TOKEN\"}}}"
 
 echo "stage = \"${stage}\"\nvpc_prefix = \"${vpc_prefix}\"" > ./ci.auto.tfvars
 
-cp config.remote.tfbackend.cpl config.remote.tfbackend
+cp config.remote.tfbackend.tpl config.remote.tfbackend
 sed -i "s#TF_ORG#${TF_ORG}#g"
 sed -i "s#TF_WORKSPACE#${TF_WORKSPACE}#g"
 sed -i "s#TF_HOST#${TF_HOST}#g"
