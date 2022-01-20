@@ -55,7 +55,8 @@ resource "aws_ecs_cluster" "this" {
 resource "aws_security_group" "this" { 
     name                 = "${local.app_name}-cluster"
     description          = "Cluster security group for ${local.app_name}"
-
+    vpc_id               = module.vpc.vpc_id
+    
     ingress {
         protocol  = "-1"
         from_port = 0
