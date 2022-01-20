@@ -24,7 +24,8 @@ TF_WORKSPACE="library-${stage}"
 mkdir -p ~/.terraform.d/
 echo "{\"credentials\": {\"app.terraform.io\": {\"token\": \"$TF_API_TOKEN\"}}}" > ~/.terraform.d/credentials.tfrc.json
 
-echo "stage = \"${stage}\"\\nvpc_prefix = \"${vpc_prefix}\"" > ./ci.auto.tfvars
+echo "stage = \"${stage}\"" > ./ci.auto.tfvars
+echo "vpc_prefix = \"${vpc_prefix}\"" >> ./ci.auto.tfvars
 
 cp config.remote.tfbackend.tpl config.remote.tfbackend
 sed -i "s#TF_ORG#${TF_ORG}#g" config.remote.tfbackend
