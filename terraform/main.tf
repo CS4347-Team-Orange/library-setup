@@ -2,19 +2,19 @@ module "vpc" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=v3.3.0"
 
   name = local.app_name
-  cidr = "10.11.0.0/16"
+  cidr = "${var.vpc_prefix}.0.0/16"
   // 10.0.0.0/8 is reserved for EC2-Classic
 
   azs                   = ["us-east-2a", "us-east-2b", "us-east-2c"]
 
-  private_subnets           = ["10.11.0.0/19", "10.11.64.0/19", "10.11.128.0/19"]
+  private_subnets           = ["${var.vpc_prefix}.0.0/19", "${var.vpc_prefix}.64.0/19", "${var.vpc_prefix}.128.0/19"]
   private_subnet_suffix     = "private"
   private_subnet_tags       = {
     Type  = "private"
   }
 
 
-  public_subnets            = ["10.11.32.0/19", "10.11.96.0/19", "10.11.160.0/19"]
+  public_subnets            = ["${var.vpc_prefix}.32.0/19", "${var.vpc_prefix}.96.0/19", "${var.vpc_prefix}.160.0/19"]
   public_subnet_suffix      = "public"
   public_subnet_tags       = {
     Type  = "public"
