@@ -8,9 +8,15 @@ if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "develop" ]];
 elif [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
     stage="live"
     vpc_prefix="10.100"
-else
-    echo "We only make deployments related to master or develop, for now."
-    exit 0
+elif [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
+    stage="${TRAVIS_BRANCH}"
+    vpc_prefix="10.101"
+elif [[ "${TRAVIS_PULL_REQUEST}" == "true" ]]; then
+    stage="${TRAVIS_PULL_REQUEST_BRANCH}" # The source branch
+    vpc_prefix="10.101"
+else 
+    echo "TRAVIS_PULL_REQUEST has unexpected value: ${TRAVIS_PULL_REQUEST}"
+    exit 1
 fi
 
 TF_WORKSPACE="library-${stage}"
