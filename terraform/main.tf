@@ -51,3 +51,22 @@ module "vpc" {
 resource "aws_ecs_cluster" "this" { 
     name                 = local.app_name
 }
+
+resource "aws_security_group" "this" { 
+    name                 = "${local.app_name}-cluster"
+    description          = "Cluster security group for ${local.app_name}"
+
+    ingress {
+        protocol  = "-1"
+        from_port = 0
+        to_port   = 0
+        self      = true
+    }
+  
+    egress {
+        protocol  = "-1"
+        from_port = 0
+        to_port   = 0
+        self      = true
+    }
+}

@@ -17,3 +17,11 @@ output "vpc_public_subnets" {
 output "vpc_private_subnets" { 
     value = module.vpc.private_subnets
 }
+
+output "cluster_security_group_arn" { 
+    value = aws_security_group.this.arn
+}
+
+output "cluster_security_group_id" { 
+    value = aws_security_group.this.id
+}
