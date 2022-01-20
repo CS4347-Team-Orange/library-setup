@@ -1,5 +1,7 @@
 # CS4347 Project
 
+[![Build Status](https://app.travis-ci.com/CS4347-Team-Orange/library-setup.svg?branch=master)](https://app.travis-ci.com/CS4347-Team-Orange/library-setup)
+
 We're building a library catalog on Postgres.  The application must be written in java.
 
 # Features

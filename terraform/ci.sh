@@ -2,24 +2,32 @@
 
 set -eou pipefail
 
-if [[ "${TRAVIS_PULL_REQUEST}" == "true" && "${TRAVIS_BRANCH}" == "master" ]]; then
-    stage="dev"
+if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "develop" ]]; then
+    stage="develop"
+    vpc_prefix="10.99"
 elif [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
     stage="live"
-else
-    echo "We only make deployments related to master, for now."
-    exit 0
+    vpc_prefix="10.100"
+elif [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
+    stage="${TRAVIS_BRANCH}"
+    vpc_prefix="10.101"
+else 
+    stage="${TRAVIS_PULL_REQUEST_BRANCH}" # The source branch
+    vpc_prefix="10.101"
 fi
+
+TF_WORKSPACE="library-${stage}"
 
 mkdir -p ~/.terraform.d/
 echo "{\"credentials\": {\"app.terraform.io\": {\"token\": \"$TF_API_TOKEN\"}}}" > ~/.terraform.d/credentials.tfrc.json
 
 echo "stage = \"${stage}\"" > ./ci.auto.tfvars
+echo "vpc_prefix = \"${vpc_prefix}\"" >> ./ci.auto.tfvars
 
-cp config.remote.tfbackend.cpl config.remote.tfbackend
-sed -i "s#TF_ORG#${TF_ORG}#g"
-sed -i "s#TF_WORKSPACE#${TF_WORKSPACE}#g"
-sed -i "s#TF_HOST#${TF_HOST}#g"
+cp config.remote.tfbackend.tpl config.remote.tfbackend
+sed -i "s#TF_ORG#${TF_ORG}#g" config.remote.tfbackend
+sed -i "s#TF_WORKSPACE#${TF_WORKSPACE}#g" config.remote.tfbackend
+sed -i "s#TF_HOST#${TF_HOST}#g" config.remote.tfbackend 
 
 terraform init -backend-config="config.remote.tfbackend"
 terraform plan
