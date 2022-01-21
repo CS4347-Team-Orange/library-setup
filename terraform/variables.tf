@@ -10,6 +10,12 @@ variable "vpc_prefix" {
     type        = string
 }
 
+variable "alert_email" { 
+    description = "The email to receive alerts"
+    default     = "alex-library@mailinator.com"
+    type        = string
+}
+
 locals { 
     app_name = "library-${var.stage}"
 }

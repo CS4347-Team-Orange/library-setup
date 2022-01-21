@@ -8,12 +8,9 @@ if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "develop" ]];
 elif [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
     stage="live"
     vpc_prefix="10.100"
-elif [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
-    stage="${TRAVIS_BRANCH}"
-    vpc_prefix="10.101"
-else 
-    stage="${TRAVIS_PULL_REQUEST_BRANCH}" # The source branch
-    vpc_prefix="10.101"
+else
+    echo "Deployment not supported for this branch"
+    exit 0
 fi
 
 TF_WORKSPACE="library-${stage}"
